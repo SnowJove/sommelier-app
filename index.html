@@ -2,117 +2,384 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#160d10">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e090b">
 
-<title>Sommora V.02</title>
+<title>Sommora — Your Sommelier Journey</title>
 
 <style>
-:root {
-  --bg:#100b0d;
-  --card:#1b1316;
-  --card2:#24191d;
+:root{
+  --bg:#0e090b;
+  --bg2:#160d10;
+  --card:#1b1215;
+  --card2:#24171b;
   --wine:#7b2338;
-  --wine2:#a13a55;
+  --wine2:#a33b56;
   --cream:#f5ead8;
+  --cream2:#dfd0bd;
   --muted:#a99b98;
-  --line:#392b30;
+  --line:#39282e;
+  --gold:#c7a86b;
   --green:#79966d;
 }
 
-* {
+*{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-body {
+html{
+  scroll-behavior:smooth;
+}
+
+body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:var(--bg);
+  font-family:Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(123,35,56,.14),transparent 30%),
+    var(--bg);
   color:var(--cream);
-  padding-bottom:90px;
+  padding-bottom:105px;
 }
 
-header {
-  padding:26px 20px 12px;
+button,input,textarea,select{
+  font:inherit;
 }
 
-h1 {
+button{
+  cursor:pointer;
+}
+
+header{
+  max-width:600px;
+  margin:auto;
+  padding:28px 20px 8px;
+}
+
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brandName{
   margin:0;
-  font-family:Georgia, serif;
-  font-size:32px;
+  font-family:Georgia,serif;
+  font-size:34px;
+  font-weight:500;
+  letter-spacing:3px;
 }
 
-.subtitle {
+.brandMark{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid rgba(199,168,107,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:20px;
+}
+
+.subtitle{
   color:var(--muted);
-  margin-top:5px;
+  margin-top:4px;
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:15px;
 }
 
-.page {
+.page{
   display:none;
-  padding:10px 18px;
+  padding:8px 18px 25px;
   max-width:600px;
   margin:auto;
 }
 
-.page.active {
+.page.active{
   display:block;
 }
 
-.card {
-  background:var(--card);
+.card{
+  background:linear-gradient(145deg,var(--card),#171013);
   border:1px solid var(--line);
-  border-radius:18px;
+  border-radius:22px;
   padding:18px;
-  margin:14px 0;
+  margin:15px 0;
 }
 
-.hero {
-  background:linear-gradient(135deg,#35151e,#1b1115);
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:245px;
+  padding:25px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(199,168,107,.15),transparent 22%),
+    radial-gradient(circle at 10% 100%,rgba(161,58,85,.25),transparent 35%),
+    linear-gradient(145deg,#35141e,#170d11 65%);
 }
 
-button {
+.hero:after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  border:1px solid rgba(245,234,216,.06);
+  border-radius:50%;
+  right:-80px;
+  top:-70px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+.hero h2{
+  font-family:Georgia,serif;
+  font-size:31px;
+  line-height:1.08;
+  margin:9px 0 8px;
+  max-width:310px;
+}
+
+.hero p{
+  max-width:330px;
+  line-height:1.5;
+  margin:0;
+}
+
+.primary{
   border:none;
-  border-radius:14px;
-  padding:14px 16px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.primary {
   width:100%;
-  background:var(--wine);
+  background:linear-gradient(135deg,var(--wine),#982f4a);
   color:white;
   font-weight:bold;
-  margin-top:12px;
+  border-radius:15px;
+  padding:14px 16px;
+  margin-top:16px;
 }
 
-.secondary {
+.secondary{
+  border:1px solid var(--line);
   width:100%;
   background:var(--card2);
   color:var(--cream);
-  border:1px solid var(--line);
-  margin-top:8px;
-}
-
-.stats {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.stat {
-  background:var(--card);
-  padding:15px;
   border-radius:15px;
+  padding:14px 16px;
+  margin-top:9px;
+}
+
+.textButton{
+  border:0;
+  background:none;
+  color:var(--cream);
+  padding:0;
+  font-weight:bold;
+}
+
+.sectionHeading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin:27px 2px 10px;
+}
+
+.sectionHeading h3{
+  font-family:Georgia,serif;
+  font-size:22px;
+  font-weight:500;
+  margin:0;
+}
+
+.sectionHeading span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.curiosityCard{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(123,35,56,.20),transparent 60%),
+    var(--card);
+}
+
+.curiosityType{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.curiosityCard h3{
+  font-family:Georgia,serif;
+  font-size:23px;
+  margin:9px 0 7px;
+}
+
+.curiosityCard p{
+  color:var(--cream2);
+  line-height:1.5;
+  margin:0;
+}
+
+.curiosityFooter{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:18px;
+}
+
+.curiosityDots{
+  color:var(--muted);
+  letter-spacing:4px;
+  font-size:10px;
+}
+
+.journeyCard{
+  padding:21px;
+}
+
+.levelRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+}
+
+.levelName{
+  font-family:Georgia,serif;
+  font-size:25px;
+  margin-top:5px;
+}
+
+.levelPercent{
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:25px;
+}
+
+.progressBar{
+  height:5px;
+  background:#2b2024;
+  border-radius:10px;
+  overflow:hidden;
+  margin:16px 0 8px;
+}
+
+.progressFill{
+  height:100%;
+  background:linear-gradient(90deg,var(--wine),var(--gold));
+  width:0%;
+  border-radius:10px;
+  transition:.4s;
+}
+
+.journeyHint{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.journeyStats{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:9px;
+  margin-top:17px;
+}
+
+.journeyStat{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+  background:#160f12;
+  color:var(--cream);
   border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px 16px;
 }
 
-.stat strong {
-  font-size:24px;
+.statLeft{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.statIcon{
+  width:39px;
+  height:39px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:var(--card2);
+  font-size:19px;
+}
+
+.statNumber{
   display:block;
+  font-family:Georgia,serif;
+  font-size:21px;
 }
 
-label {
+.statLabel{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.statArrow{
+  color:var(--gold);
+}
+
+.grapeJourney{
+  background:
+    radial-gradient(circle at 100% 0,rgba(121,150,109,.12),transparent 35%),
+    var(--card);
+}
+
+.grapeJourney h3{
+  font-family:Georgia,serif;
+  font-size:24px;
+  margin:8px 0;
+}
+
+.grapeJourney p{
+  color:var(--cream2);
+  line-height:1.5;
+}
+
+.recentRow{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.recentRow:last-child{
+  border-bottom:none;
+}
+
+.small{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.sectionTitle{
+  font-family:Georgia,serif;
+  font-size:27px;
+  margin:15px 0 5px;
+}
+
+label{
   display:block;
   color:var(--muted);
   margin-top:14px;
@@ -120,7 +387,7 @@ label {
   font-size:13px;
 }
 
-input, textarea, select {
+input,textarea,select{
   width:100%;
   padding:13px;
   background:#130e10;
@@ -130,17 +397,17 @@ input, textarea, select {
   font-size:16px;
 }
 
-textarea {
+textarea{
   min-height:80px;
 }
 
-.chips {
+.chips{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
 }
 
-.chip {
+.chip{
   background:var(--card2);
   border:1px solid var(--line);
   color:var(--cream);
@@ -149,23 +416,12 @@ textarea {
   font-size:14px;
 }
 
-.chip.selected {
+.chip.selected{
   background:var(--wine);
   border-color:var(--wine2);
 }
 
-.sectionTitle {
-  font-family:Georgia,serif;
-  font-size:23px;
-  margin:15px 0 5px;
-}
-
-.small {
-  color:var(--muted);
-  font-size:13px;
-}
-
-.progress {
+.progress{
   display:flex;
   justify-content:space-between;
   font-size:11px;
@@ -173,74 +429,44 @@ textarea {
   margin-bottom:14px;
 }
 
-.progress .current {
+.progress .current{
   color:var(--cream);
   font-weight:bold;
 }
 
-.step {
+.step{
   display:none;
 }
 
-.step.active {
+.step.active{
   display:block;
 }
 
-.navButtons {
+.navButtons{
   display:flex;
   gap:10px;
   margin-top:20px;
 }
 
-.navButtons button {
+.navButtons button{
   flex:1;
 }
 
-.wineCard {
+.wineCard{
   padding:15px;
   border-bottom:1px solid var(--line);
 }
 
-.wineCard:last-child {
+.wineCard:last-child{
   border-bottom:none;
 }
 
-.rating {
+.rating{
   color:#e7c56a;
   letter-spacing:2px;
 }
 
-.bottomNav {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#130e10;
-  border-top:1px solid var(--line);
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px 4px 14px;
-  z-index:100;
-}
-
-.bottomNav button {
-  background:none;
-  color:var(--muted);
-  padding:7px 2px;
-  font-size:12px;
-}
-
-.bottomNav button.active {
-  color:var(--cream);
-}
-
-.icon {
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.learnItem {
+.learnItem{
   background:var(--card);
   border:1px solid var(--line);
   padding:16px;
@@ -248,20 +474,81 @@ textarea {
   margin:10px 0;
 }
 
-details summary {
+details summary{
   cursor:pointer;
   font-weight:bold;
 }
 
-details p {
+details p{
   color:#d3c6c2;
   line-height:1.5;
 }
 
-hr {
+hr{
   border:0;
   border-top:1px solid var(--line);
   margin:20px 0;
+}
+
+.emptyState{
+  color:var(--muted);
+  padding:10px 0;
+  line-height:1.5;
+}
+
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(19,14,16,.97);
+  backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:8px 4px calc(10px + env(safe-area-inset-bottom));
+  z-index:100;
+}
+
+.bottomNav button{
+  border:none;
+  background:none;
+  color:var(--muted);
+  padding:6px 2px;
+  font-size:11px;
+}
+
+.bottomNav button.active{
+  color:var(--cream);
+}
+
+.icon{
+  display:block;
+  font-size:19px;
+  margin-bottom:3px;
+}
+
+.placeholderPage{
+  padding:25px 0;
+}
+
+.placeholderPage .card{
+  text-align:center;
+  padding:30px 20px;
+}
+
+.help{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:18px;
+  height:18px;
+  margin-left:5px;
+  border:1px solid var(--muted);
+  border-radius:50%;
+  color:var(--muted);
+  font-size:11px;
+  vertical-align:middle;
 }
 </style>
 </head>
@@ -269,8 +556,13 @@ hr {
 <body>
 
 <header>
-  <h1>Sommelier</h1>
-  <div class="subtitle">My Wine Journey</div>
+  <div class="brand">
+    <div>
+      <h1 class="brandName">SOMMORA</h1>
+      <div class="subtitle">Your Sommelier Journey</div>
+    </div>
+    <div class="brandMark">S</div>
+  </div>
 </header>
 
 <!-- HOME -->
@@ -278,46 +570,119 @@ hr {
 <section id="home" class="page active">
 
   <div class="card hero">
-    <div class="small">YOUR TRAINING</div>
-    <h2>Train your palate.</h2>
+    <div class="eyebrow">Continue your journey</div>
+    <h2>Understanding Acidity</h2>
     <p class="small">
-      Taste deliberately. Record what you experience.
-      Build your wine memory one bottle at a time.
+      Discover why acidity gives wine freshness, structure and life —
+      and learn how to recognize it in your glass.
     </p>
 
-    <button class="primary" onclick="startTasting()">
-      🍷 Start New Tasting
+    <button class="primary" onclick="showPage('learn',getNavButton('learn'))">
+      Continue Learning →
     </button>
   </div>
 
-  <h3>Progress</h3>
+  <div class="sectionHeading">
+    <h3>Curious?</h3>
+    <span>Discover something</span>
+  </div>
 
-  <div class="stats">
-    <div class="stat">
-      <strong id="wineCount">0</strong>
-      Wines
-    </div>
+  <div class="card curiosityCard" onclick="nextCuriosity()">
+    <div id="curiosityType" class="curiosityType"></div>
+    <h3 id="curiosityTitle"></h3>
+    <p id="curiosityText"></p>
 
-    <div class="stat">
-      <strong id="grapeCount">0</strong>
-      Grapes
-    </div>
-
-    <div class="stat">
-      <strong id="countryCount">0</strong>
-      Countries
-    </div>
-
-    <div class="stat">
-      <strong id="regionCount">0</strong>
-      Regions
+    <div class="curiosityFooter">
+      <button class="textButton">Another discovery →</button>
+      <div class="curiosityDots">● ○ ○</div>
     </div>
   </div>
 
-  <h3>Recent Tastings</h3>
+  <div class="sectionHeading">
+    <h3>Your Sommora Journey</h3>
+    <span>Explore at your pace</span>
+  </div>
+
+  <div class="card journeyCard">
+
+    <div class="levelRow">
+      <div>
+        <div class="eyebrow">Your current chapter</div>
+        <div id="levelName" class="levelName">Wine Explorer</div>
+      </div>
+
+      <div id="journeyPercent" class="levelPercent">0%</div>
+    </div>
+
+    <div class="progressBar">
+      <div id="journeyProgress" class="progressFill"></div>
+    </div>
+
+    <div class="journeyHint">
+      Your journey grows through curiosity, learning and tasting.
+    </div>
+
+    <div class="journeyStats">
+
+      <button class="journeyStat" onclick="showPage('wines',getNavButton('journal'))">
+        <span class="statLeft">
+          <span class="statIcon">🍷</span>
+          <span>
+            <strong id="wineCount" class="statNumber">0</strong>
+            <span class="statLabel">Wines Tasted</span>
+          </span>
+        </span>
+        <span class="statArrow">›</span>
+      </button>
+
+      <button class="journeyStat" onclick="showPage('world')">
+        <span class="statLeft">
+          <span class="statIcon">🌍</span>
+          <span>
+            <strong id="worldCount" class="statNumber">0 Countries · 0 Regions</strong>
+            <span class="statLabel">Your Wine World</span>
+          </span>
+        </span>
+        <span class="statArrow">›</span>
+      </button>
+
+      <button class="journeyStat" onclick="showPage('grapes')">
+        <span class="statLeft">
+          <span class="statIcon">🍇</span>
+          <span>
+            <strong id="grapeCount" class="statNumber">0</strong>
+            <span class="statLabel">Grapes Explored</span>
+          </span>
+        </span>
+        <span class="statArrow">›</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card grapeJourney">
+    <div class="eyebrow">Your grape journey</div>
+    <h3 id="grapeJourneyTitle">Your palate is waiting.</h3>
+
+    <p id="grapeJourneyText">
+      Record your first wine and Sommora will begin building your grape journey.
+    </p>
+
+    <button class="textButton" onclick="showPage('grapes')">
+      Try something new →
+    </button>
+  </div>
+
+  <div class="sectionHeading">
+    <h3>Recent Wines</h3>
+    <span onclick="showPage('wines',getNavButton('journal'))">View journal</span>
+  </div>
 
   <div id="recentWines" class="card">
-    <div class="small">Your first tasting will appear here.</div>
+    <div class="emptyState">
+      Your first tasting will appear here.
+    </div>
   </div>
 
 </section>
@@ -333,8 +698,6 @@ hr {
   <span id="p3">Palate</span>
   <span id="p4">Conclusion</span>
 </div>
-
-<!-- STEP 0 -->
 
 <div class="step" id="step0">
 
@@ -371,8 +734,6 @@ hr {
 
 </div>
 
-<!-- LOOK -->
-
 <div class="step" id="step1">
 
 <div class="sectionTitle">Look 👁️</div>
@@ -385,13 +746,13 @@ hr {
 <button class="chip">Rosé</button>
 </div>
 
-<label>Clarity</label>
+<label>Clarity <span class="help" title="Is the wine visually clear or hazy?">?</span></label>
 <div class="chips" data-field="clarity">
 <button class="chip">Clear</button>
 <button class="chip">Hazy</button>
 </div>
 
-<label>Intensity</label>
+<label>Intensity <span class="help" title="How pale or deep is the colour?">?</span></label>
 <div class="chips" data-field="appearanceIntensity">
 <button class="chip">Pale</button>
 <button class="chip">Medium</button>
@@ -411,8 +772,6 @@ hr {
 
 </div>
 
-<!-- NOSE -->
-
 <div class="step" id="step2">
 
 <div class="sectionTitle">Nose 👃</div>
@@ -422,13 +781,13 @@ Smell before swirling. Then swirl and smell again.
 Work broad → specific.
 </p>
 
-<label>Condition</label>
+<label>Condition <span class="help" title="Is the wine clean, or does it show signs of a fault?">?</span></label>
 <div class="chips" data-field="condition">
 <button class="chip">Clean</button>
 <button class="chip">Fault suspected</button>
 </div>
 
-<label>Aroma Intensity</label>
+<label>Aroma Intensity <span class="help" title="How strongly can you smell the wine?">?</span></label>
 <div class="chips" data-field="noseIntensity">
 <button class="chip">Light</button>
 <button class="chip">Medium</button>
@@ -537,8 +896,6 @@ Work broad → specific.
 
 </div>
 
-<!-- PALATE -->
-
 <div class="step" id="step3">
 
 <div class="sectionTitle">Palate 👅</div>
@@ -560,8 +917,6 @@ Focus on structure before flavour.
 
 </div>
 
-<!-- CONCLUSION -->
-
 <div class="step" id="step4">
 
 <div class="sectionTitle">Conclusion 🎓</div>
@@ -576,7 +931,6 @@ Focus on structure before flavour.
 <textarea id="memoryClues"></textarea>
 
 <label>Personal Rating</label>
-
 <div class="chips" data-field="rating">
 <button class="chip">1</button>
 <button class="chip">2</button>
@@ -586,7 +940,6 @@ Focus on structure before flavour.
 </div>
 
 <label>Would you buy it again?</label>
-
 <div class="chips" data-field="buyAgain">
 <button class="chip">Yes</button>
 <button class="chip">Maybe</button>
@@ -605,14 +958,15 @@ Focus on structure before flavour.
 
 </section>
 
-<!-- MY WINES -->
+<!-- JOURNAL -->
 
 <section id="wines" class="page">
 
 <div class="sectionTitle">My Wines</div>
+<p class="small">Every bottle becomes part of your Sommora journey.</p>
 
 <input id="searchWine"
-placeholder="Search wines..."
+placeholder="Search your wines..."
 oninput="renderWines()">
 
 <div id="wineList" class="card"></div>
@@ -624,18 +978,21 @@ oninput="renderWines()">
 <section id="learn" class="page">
 
 <div class="sectionTitle">Learn</div>
-<p class="small">Your pocket sommelier reference.</p>
+<p class="small">Understand wine at your own pace.</p>
 
 <details class="learnItem">
 <summary>👁️ Appearance Guide</summary>
+<p>White: Lemon-green → Lemon → Gold → Amber → Brown</p>
+<p>Red: Purple → Ruby → Garnet → Tawny → Brown</p>
+<p>Rosé: Pink → Salmon → Orange</p>
+</details>
+
+<details class="learnItem" open>
+<summary>💧 Understanding Acidity</summary>
 <p>
-White: Lemon-green → Lemon → Gold → Amber → Brown
-</p>
-<p>
-Red: Purple → Ruby → Garnet → Tawny → Brown
-</p>
-<p>
-Rosé: Pink → Salmon → Orange
+Acidity creates freshness and makes your mouth water.
+Pay attention to salivation after swallowing or spitting.
+Higher mouth-watering sensation usually indicates higher acidity.
 </p>
 </details>
 
@@ -643,16 +1000,8 @@ Rosé: Pink → Salmon → Orange
 <summary>👃 How to Smell Wine</summary>
 <p>
 Smell first without swirling. Then swirl gently and smell again.
-Start broad: fruit, floral, herbal, spice, oak, earth.
+Start broad: fruit, floral, herbal, spice, oak and earth.
 Only then become specific.
-</p>
-</details>
-
-<details class="learnItem">
-<summary>👅 Acidity</summary>
-<p>
-Acidity creates freshness and makes your mouth water.
-Pay attention to salivation after swallowing or spitting.
 </p>
 </details>
 
@@ -693,355 +1042,761 @@ Never let someone else's tasting notes tell you what you should smell.
 
 </section>
 
+<!-- WINE WORLD -->
+
+<section id="world" class="page">
+
+<div class="sectionTitle">My Wine World</div>
+<p class="small">The places your wine journey has taken you.</p>
+
+<div id="worldList" class="card"></div>
+
+</section>
+
+<!-- GRAPES -->
+
+<section id="grapes" class="page">
+
+<div class="sectionTitle">My Grapes</div>
+<p class="small">Every variety you've discovered along the way.</p>
+
+<div id="grapeList" class="card"></div>
+
+</section>
+
+<!-- PROFILE -->
+
+<section id="profile" class="page placeholderPage">
+
+<div class="sectionTitle">Your Journey</div>
+
+<div class="card">
+  <div class="eyebrow">Sommora V.02</div>
+  <h2 style="font-family:Georgia,serif;">Your story is just beginning.</h2>
+  <p class="small">
+    Your future profile will bring together your journey,
+    discoveries and personal wine preferences.
+  </p>
+</div>
+
+</section>
+
 <!-- NAV -->
 
 <nav class="bottomNav">
 
-<button onclick="showPage('home',this)" class="active">
+<button data-nav="home" onclick="showPage('home',this)" class="active">
 <span class="icon">⌂</span>
 Home
 </button>
 
-<button onclick="startTasting()">
+<button data-nav="learn" onclick="showPage('learn',this)">
+<span class="icon">◇</span>
+Learn
+</button>
+
+<button data-nav="taste" onclick="startTasting(this)">
 <span class="icon">🍷</span>
 Taste
 </button>
 
-<button onclick="showPage('wines',this)">
+<button data-nav="journal" onclick="showPage('wines',this)">
 <span class="icon">▤</span>
-My Wines
+Journal
 </button>
 
-<button onclick="showPage('learn',this)">
-<span class="icon">🎓</span>
-Learn
+<button data-nav="profile" onclick="showPage('profile',this)">
+<span class="icon">○</span>
+Profile
 </button>
 
 </nav>
 
 <script>
 
-let currentStep = 0;
-let selections = {};
-let aromas = [];
+let currentStep=0;
+let selections={};
+let aromas=[];
+let curiosityIndex=0;
 
-const palateOptions = {
-  Sweetness:["Dry","Off-dry","Medium","Sweet"],
-  Acidity:["Low","Medium-","Medium","Medium+","High"],
-  Tannin:["Low","Medium-","Medium","Medium+","High"],
-  Alcohol:["Low","Medium","High"],
-  Body:["Light","Medium-","Medium","Medium+","Full"],
-  "Flavor Intensity":["Light","Medium","Pronounced"],
-  Finish:["Short","Medium","Long"]
+const curiosityCards=[
+{
+type:"Understand Your Wine",
+title:"Why does acidity matter?",
+text:"Acidity gives wine freshness and structure. One clue is simple: notice how much your mouth waters after a sip."
+},
+{
+type:"Taste Better",
+title:"Why do we swirl wine?",
+text:"Swirling increases contact with air and helps aromatic compounds reach your nose more easily."
+},
+{
+type:"Taste Better",
+title:"Smell before you swirl.",
+text:"Your first quiet sniff can reveal delicate aromas. Smell once before swirling, then compare."
+},
+{
+type:"Understand Your Wine",
+title:"What exactly is tannin?",
+text:"Tannin is the drying, gripping sensation you may feel on your gums, tongue and cheeks."
+},
+{
+type:"Understand Your Wine",
+title:"What does body mean?",
+text:"Body describes the weight and texture of wine. Think skim milk, whole milk and cream."
+},
+{
+type:"Discover a Grape",
+title:"Meet Pinot Noir.",
+text:"Pinot Noir is known for red-fruit aromas, relatively high acidity and the ability to express subtle differences in place."
+},
+{
+type:"Discover a Grape",
+title:"Meet Riesling.",
+text:"Riesling can range from bone-dry to intensely sweet while often retaining vibrant acidity."
+},
+{
+type:"Discover a Grape",
+title:"Meet Chardonnay.",
+text:"Chardonnay can taste dramatically different depending on climate, winemaking and oak."
+},
+{
+type:"Discover a Grape",
+title:"Meet Cabernet Sauvignon.",
+text:"Cabernet Sauvignon commonly combines black-fruit character with noticeable tannin and structure."
+},
+{
+type:"Discover the World",
+title:"Why is Burgundy so famous?",
+text:"Burgundy built its reputation around detailed expressions of place, especially through Pinot Noir and Chardonnay."
+},
+{
+type:"Discover the World",
+title:"What makes Mendoza distinctive?",
+text:"Mendoza combines high-altitude vineyards, abundant sunshine and dry conditions at the foot of the Andes."
+},
+{
+type:"Discover the World",
+title:"Champagne is a place.",
+text:"Champagne is a wine region in France. Its name is protected for wines produced according to its rules."
+},
+{
+type:"Taste Better",
+title:"Temperature changes your wine.",
+text:"Serving wine too warm can emphasize alcohol; serving it too cold can mute aromas and flavour."
+},
+{
+type:"Taste Better",
+title:"The finish tells a story.",
+text:"After swallowing or spitting, notice how long pleasant flavours remain. That persistence is the finish."
+},
+{
+type:"Understand Your Wine",
+title:"Dry doesn't mean drying.",
+text:"Dry describes sweetness. A drying sensation is usually associated with tannin — two very different things."
+},
+{
+type:"Taste Better",
+title:"Compare two wines.",
+text:"Side-by-side tasting makes differences in acidity, body, tannin and aroma much easier to recognize."
+},
+{
+type:"Understand Your Wine",
+title:"Alcohol isn't body.",
+text:"Alcohol can add warmth and weight, but body is the wine's overall texture and presence in your mouth."
+},
+{
+type:"Discover the World",
+title:"Place changes flavour.",
+text:"Climate, soil, altitude and exposure all influence how grapes ripen and how a wine can express itself."
+}
+];
+
+const palateOptions={
+Sweetness:["Dry","Off-dry","Medium","Sweet"],
+Acidity:["Low","Medium-","Medium","Medium+","High"],
+Tannin:["Low","Medium-","Medium","Medium+","High"],
+Alcohol:["Low","Medium","High"],
+Body:["Light","Medium-","Medium","Medium+","Full"],
+"Flavor Intensity":["Light","Medium","Pronounced"],
+Finish:["Short","Medium","Long"]
 };
+
+const helpText={
+Sweetness:"Is there perceptible sugar, or does the wine finish dry?",
+Acidity:"Notice how much your mouth waters after the wine. More watering usually suggests higher acidity.",
+Tannin:"The drying or gripping sensation on your gums, tongue and cheeks.",
+Alcohol:"Notice warmth, especially toward the back of your throat.",
+Body:"The overall weight and texture of the wine in your mouth.",
+"Flavor Intensity":"How strongly do the flavours present themselves?",
+Finish:"How long do pleasant flavours remain after swallowing or spitting?"
+};
+
+function getWines(){
+return JSON.parse(localStorage.getItem("sommelierWines")||"[]");
+}
+
+function normalize(value){
+return (value||"").trim();
+}
+
+function uniqueValues(values){
+const map=new Map();
+
+values.filter(Boolean).forEach(value=>{
+const clean=normalize(value);
+const key=clean.toLowerCase();
+
+if(clean && !map.has(key)){
+map.set(key,clean);
+}
+});
+
+return [...map.values()];
+}
+
+function getNavButton(name){
+return document.querySelector('[data-nav="'+name+'"]');
+}
 
 function buildPalate(){
 
-  const container = document.getElementById("palateFields");
+const container=document.getElementById("palateFields");
 
-  Object.entries(palateOptions).forEach(([field,options])=>{
+Object.entries(palateOptions).forEach(([field,options])=>{
 
-    const label = document.createElement("label");
-    label.textContent = field;
+const label=document.createElement("label");
+label.innerHTML=
+field+
+' <span class="help" onclick="showHelp(\''+
+field.replace(/'/g,"\\'")+
+'\')">?</span>';
 
-    const chips = document.createElement("div");
-    chips.className = "chips";
-    chips.dataset.field = field;
+const chips=document.createElement("div");
+chips.className="chips";
+chips.dataset.field=field;
 
-    options.forEach(option=>{
+options.forEach(option=>{
+const button=document.createElement("button");
+button.className="chip";
+button.textContent=option;
+chips.appendChild(button);
+});
 
-      const button = document.createElement("button");
+container.appendChild(label);
+container.appendChild(chips);
 
-      button.className = "chip";
-      button.textContent = option;
+});
 
-      chips.appendChild(button);
+}
 
-    });
-
-    container.appendChild(label);
-    container.appendChild(chips);
-
-  });
-
+function showHelp(field){
+alert(field+"\n\n"+(helpText[field]||"A standard wine tasting term."));
 }
 
 buildPalate();
 
 document.addEventListener("click",function(e){
 
-  if(!e.target.classList.contains("chip")) return;
+if(e.target.classList.contains("help")){
+e.preventDefault();
+return;
+}
 
-  e.preventDefault();
+if(!e.target.classList.contains("chip")) return;
 
-  const chip = e.target;
-  const group = chip.parentElement;
+e.preventDefault();
 
-  if(group.classList.contains("multi")){
+const chip=e.target;
+const group=chip.parentElement;
 
-    chip.classList.toggle("selected");
+if(group.classList.contains("multi")){
 
-    const value = chip.textContent;
+chip.classList.toggle("selected");
 
-    if(chip.classList.contains("selected")){
-      if(!aromas.includes(value)) aromas.push(value);
-    } else {
-      aromas = aromas.filter(a=>a!==value);
-    }
+const value=chip.textContent;
 
-  } else {
+if(chip.classList.contains("selected")){
+if(!aromas.includes(value)) aromas.push(value);
+}else{
+aromas=aromas.filter(a=>a!==value);
+}
 
-    group.querySelectorAll(".chip").forEach(c=>{
-      c.classList.remove("selected");
-    });
+}else{
 
-    chip.classList.add("selected");
+group.querySelectorAll(".chip").forEach(c=>{
+c.classList.remove("selected");
+});
 
-    if(group.dataset.field){
-      selections[group.dataset.field] = chip.textContent;
-    }
+chip.classList.add("selected");
 
-  }
+if(group.dataset.field){
+selections[group.dataset.field]=chip.textContent;
+}
+
+}
 
 });
 
 function showPage(id,button){
 
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
 
-  document.getElementById(id).classList.add("active");
+const page=document.getElementById(id);
+if(page) page.classList.add("active");
 
-  document.querySelectorAll(".bottomNav button").forEach(b=>{
-    b.classList.remove("active");
-  });
+document.querySelectorAll(".bottomNav button").forEach(b=>{
+b.classList.remove("active");
+});
 
-  if(button) button.classList.add("active");
+if(button) button.classList.add("active");
 
-  if(id==="wines") renderWines();
+if(id==="home") updateDashboard();
+if(id==="wines") renderWines();
+if(id==="world") renderWorld();
+if(id==="grapes") renderGrapes();
 
-  window.scrollTo(0,0);
+window.scrollTo(0,0);
 }
 
-function startTasting(){
+function startTasting(button){
 
-  showPage("tasting");
+showPage("tasting",button||getNavButton("taste"));
 
-  currentStep = 0;
-
-  showStep();
+currentStep=0;
+showStep();
 
 }
 
 function showStep(){
 
-  document.querySelectorAll(".step").forEach(s=>{
-    s.classList.remove("active");
-  });
+document.querySelectorAll(".step").forEach(s=>{
+s.classList.remove("active");
+});
 
-  document.getElementById("step"+currentStep).classList.add("active");
+document.getElementById("step"+currentStep).classList.add("active");
 
-  for(let i=0;i<5;i++){
-    document.getElementById("p"+i).classList.remove("current");
-  }
+for(let i=0;i<5;i++){
+document.getElementById("p"+i).classList.remove("current");
+}
 
-  document.getElementById("p"+currentStep).classList.add("current");
+document.getElementById("p"+currentStep).classList.add("current");
 
-  window.scrollTo(0,0);
+window.scrollTo(0,0);
 }
 
 function nextStep(){
-
-  if(currentStep<4){
-    currentStep++;
-    showStep();
-  }
-
+if(currentStep<4){
+currentStep++;
+showStep();
+}
 }
 
 function previousStep(){
-
-  if(currentStep>0){
-    currentStep--;
-    showStep();
-  }
-
+if(currentStep>0){
+currentStep--;
+showStep();
+}
 }
 
 function value(id){
-  return document.getElementById(id)?.value || "";
+return document.getElementById(id)?.value||"";
 }
 
 function saveTasting(){
 
-  const wine = {
+const wine={
 
-    id:Date.now(),
+id:Date.now(),
 
-    wine:value("wineName"),
-    producer:value("producer"),
-    vintage:value("vintage"),
-    country:value("country"),
-    region:value("region"),
-    grape:value("grape"),
-    price:value("price"),
+wine:value("wineName"),
+producer:value("producer"),
+vintage:value("vintage"),
+country:value("country"),
+region:value("region"),
+grape:value("grape"),
+price:value("price"),
 
-    type:selections.type || "",
-    clarity:selections.clarity || "",
-    appearanceIntensity:selections.appearanceIntensity || "",
-    colour:value("colour"),
+type:selections.type||"",
+clarity:selections.clarity||"",
+appearanceIntensity:selections.appearanceIntensity||"",
+colour:value("colour"),
+lookNotes:value("lookNotes"),
 
-    condition:selections.condition || "",
-    noseIntensity:selections.noseIntensity || "",
+condition:selections.condition||"",
+noseIntensity:selections.noseIntensity||"",
+aromas:[...aromas],
+customAromas:value("customAromas"),
 
-    aromas:[...aromas],
+sweetness:selections.Sweetness||"",
+acidity:selections.Acidity||"",
+tannin:selections.Tannin||"",
+alcohol:selections.Alcohol||"",
+body:selections.Body||"",
+flavorIntensity:selections["Flavor Intensity"]||"",
+finish:selections.Finish||"",
+palateNotes:value("palateNotes"),
 
-    sweetness:selections.Sweetness || "",
-    acidity:selections.Acidity || "",
-    tannin:selections.Tannin || "",
-    alcohol:selections.Alcohol || "",
-    body:selections.Body || "",
-    finish:selections.Finish || "",
+pairing:value("pairing"),
+pairingWhy:value("pairingWhy"),
+memory:value("memoryClues"),
 
-    pairing:value("pairing"),
-    pairingWhy:value("pairingWhy"),
-    memory:value("memoryClues"),
+rating:selections.rating||"",
+buyAgain:selections.buyAgain||"",
+notes:value("finalNotes"),
 
-    rating:selections.rating || "",
-    buyAgain:selections.buyAgain || "",
+date:value("date")||new Date().toISOString().slice(0,10)
 
-    notes:value("finalNotes"),
+};
 
-    date:value("date") || new Date().toISOString().slice(0,10)
+const wines=getWines();
 
-  };
+wines.unshift(wine);
 
-  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+localStorage.setItem("sommelierWines",JSON.stringify(wines));
 
-  wines.unshift(wine);
+alert("🍷 Tasting saved to your Sommora journey.");
 
-  localStorage.setItem("sommelierWines",JSON.stringify(wines));
-
-  alert("🍷 Tasting saved!");
-
-  resetTasting();
-
-  updateDashboard();
-
-  showPage("wines");
+resetTasting();
+updateDashboard();
+showPage("wines",getNavButton("journal"));
 
 }
 
 function resetTasting(){
 
-  document.querySelectorAll("input,textarea").forEach(i=>{
-    if(i.id!=="searchWine") i.value="";
-  });
+document.querySelectorAll("input,textarea").forEach(i=>{
+if(i.id!=="searchWine") i.value="";
+});
 
-  document.querySelectorAll(".chip").forEach(c=>{
-    c.classList.remove("selected");
-  });
+document.querySelectorAll(".chip").forEach(c=>{
+c.classList.remove("selected");
+});
 
-  selections={};
-  aromas=[];
+selections={};
+aromas=[];
+
+const date=document.getElementById("date");
+if(date) date.value=new Date().toISOString().slice(0,10);
 
 }
 
 function renderWines(){
 
-  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+const wines=getWines();
 
-  const search = (document.getElementById("searchWine")?.value || "").toLowerCase();
+const search=(document.getElementById("searchWine")?.value||"").toLowerCase();
 
-  const filtered = wines.filter(w=>
-    JSON.stringify(w).toLowerCase().includes(search)
-  );
+const filtered=wines.filter(w=>
+JSON.stringify(w).toLowerCase().includes(search)
+);
 
-  const list = document.getElementById("wineList");
+const list=document.getElementById("wineList");
 
-  if(!filtered.length){
+if(!filtered.length){
+list.innerHTML='<div class="emptyState">No wines recorded yet. Your journey begins with your first tasting.</div>';
+return;
+}
 
-    list.innerHTML =
-    '<div class="small">No wines recorded yet.</div>';
+list.innerHTML=filtered.map(w=>`
 
-    return;
+<div class="wineCard">
 
-  }
+<strong>${escapeHTML(w.wine||"Unnamed Wine")}</strong>
 
-  list.innerHTML = filtered.map(w=>`
+<div class="small">
+${escapeHTML(w.producer||"")}
+${w.vintage?" • "+escapeHTML(w.vintage):""}
+</div>
 
-  <div class="wineCard">
+<div class="small">
+${escapeHTML(w.country||"")}
+${w.region?" • "+escapeHTML(w.region):""}
+</div>
 
-    <strong>${w.wine || "Unnamed Wine"}</strong>
+<div class="small">
+${escapeHTML(w.grape||"")}
+</div>
 
-    <div class="small">
-    ${w.producer || ""}
-    ${w.vintage ? " • "+w.vintage : ""}
-    </div>
+<div class="rating">
+${"★".repeat(Number(w.rating)||0)}
+</div>
 
-    <div class="small">
-    ${w.country || ""}
-    ${w.region ? " • "+w.region : ""}
-    </div>
+</div>
 
-    <div class="small">
-    ${w.grape || ""}
-    </div>
-
-    <div class="rating">
-    ${"★".repeat(Number(w.rating)||0)}
-    </div>
-
-  </div>
-
-  `).join("");
+`).join("");
 
 }
 
 function updateDashboard(){
 
-  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+const wines=getWines();
 
-  document.getElementById("wineCount").textContent = wines.length;
+const grapes=uniqueValues(wines.map(w=>w.grape));
+const countries=uniqueValues(wines.map(w=>w.country));
+const regions=uniqueValues(wines.map(w=>w.region));
 
-  document.getElementById("grapeCount").textContent =
-  new Set(wines.map(w=>w.grape).filter(Boolean)).size;
+document.getElementById("wineCount").textContent=wines.length;
+document.getElementById("grapeCount").textContent=grapes.length;
 
-  document.getElementById("countryCount").textContent =
-  new Set(wines.map(w=>w.country).filter(Boolean)).size;
+document.getElementById("worldCount").textContent=
+countries.length+" "+(countries.length===1?"Country":"Countries")+
+" · "+
+regions.length+" "+(regions.length===1?"Region":"Regions");
 
-  document.getElementById("regionCount").textContent =
-  new Set(wines.map(w=>w.region).filter(Boolean)).size;
+if(grapes.length){
 
-  const recent = wines.slice(0,3);
+document.getElementById("grapeJourneyTitle").textContent=
+"You've explored "+grapes.length+
+" "+(grapes.length===1?"variety":"varieties")+
+" across "+countries.length+
+" "+(countries.length===1?"country.":"countries.");
 
-  const container = document.getElementById("recentWines");
-
-  if(!recent.length) return;
-
-  container.innerHTML = recent.map(w=>`
-
-  <div class="wineCard">
-
-  <strong>${w.wine || "Unnamed Wine"}</strong>
-
-  <div class="small">
-  ${w.producer || ""}
-  ${w.vintage ? " • "+w.vintage : ""}
-  </div>
-
-  </div>
-
-  `).join("");
+document.getElementById("grapeJourneyText").textContent=
+"Every bottle adds another piece to your personal map of wine.";
 
 }
 
+const exploration=
+wines.length+
+(grapes.length*2)+
+countries.length+
+regions.length;
+
+let percent=Math.min(99,Math.round(exploration*3));
+
+if(exploration===0) percent=0;
+
+document.getElementById("journeyPercent").textContent=percent+"%";
+document.getElementById("journeyProgress").style.width=percent+"%";
+
+let level="Wine Explorer";
+
+if(exploration>=12) level="Curious Palate";
+if(exploration>=30) level="Wine Voyager";
+if(exploration>=60) level="Palate Explorer";
+if(exploration>=100) level="Wine Connoisseur";
+
+document.getElementById("levelName").textContent=level;
+
+const recent=wines.slice(0,3);
+const container=document.getElementById("recentWines");
+
+if(!recent.length){
+
+container.innerHTML=
+'<div class="emptyState">Your first tasting will appear here.</div>';
+
+}else{
+
+container.innerHTML=recent.map(w=>`
+
+<div class="recentRow">
+<strong>${escapeHTML(w.wine||"Unnamed Wine")}</strong>
+
+<div class="small">
+${escapeHTML(w.producer||"")}
+${w.vintage?" • "+escapeHTML(w.vintage):""}
+</div>
+
+<div class="small">
+${escapeHTML(w.country||"")}
+${w.region?" · "+escapeHTML(w.region):""}
+${w.grape?" · "+escapeHTML(w.grape):""}
+</div>
+</div>
+
+`).join("");
+
+}
+
+}
+
+function renderWorld(){
+
+const wines=getWines();
+const container=document.getElementById("worldList");
+
+const countries={};
+
+wines.forEach(w=>{
+
+const country=normalize(w.country);
+const region=normalize(w.region);
+
+if(!country) return;
+
+const key=country.toLowerCase();
+
+if(!countries[key]){
+countries[key]={
+name:country,
+wines:0,
+regions:{}
+};
+}
+
+countries[key].wines++;
+
+if(region){
+const regionKey=region.toLowerCase();
+
+if(!countries[key].regions[regionKey]){
+countries[key].regions[regionKey]={
+name:region,
+count:0
+};
+}
+
+countries[key].regions[regionKey].count++;
+}
+
+});
+
+const entries=Object.values(countries);
+
+if(!entries.length){
+
+container.innerHTML=
+'<div class="emptyState">Your Wine World will grow as you record wines from different countries and regions.</div>';
+
+return;
+
+}
+
+container.innerHTML=entries.map(country=>{
+
+const regionList=Object.values(country.regions)
+.map(region=>
+'<div class="small" style="margin-top:5px;">'+
+escapeHTML(region.name)+
+" · "+
+region.count+
+(region.count===1?" wine":" wines")+
+"</div>"
+).join("");
+
+return `
+
+<div class="wineCard">
+
+<strong>${escapeHTML(country.name)}</strong>
+
+<div class="small">
+${country.wines} ${country.wines===1?"wine":"wines"}
+</div>
+
+${regionList}
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+function renderGrapes(){
+
+const wines=getWines();
+const container=document.getElementById("grapeList");
+
+const grapes={};
+
+wines.forEach(w=>{
+
+const grape=normalize(w.grape);
+
+if(!grape) return;
+
+const key=grape.toLowerCase();
+
+if(!grapes[key]){
+grapes[key]={
+name:grape,
+count:0,
+countries:new Set()
+};
+}
+
+grapes[key].count++;
+
+if(normalize(w.country)){
+grapes[key].countries.add(normalize(w.country));
+}
+
+});
+
+const entries=Object.values(grapes)
+.sort((a,b)=>b.count-a.count);
+
+if(!entries.length){
+
+container.innerHTML=
+'<div class="emptyState">Your grape journey will appear here after you record your first wine.</div>';
+
+return;
+
+}
+
+container.innerHTML=entries.map(grape=>`
+
+<div class="wineCard">
+
+<strong>${escapeHTML(grape.name)}</strong>
+
+<div class="small">
+Tasted ${grape.count} ${grape.count===1?"time":"times"}
+ · ${grape.countries.size}
+ ${grape.countries.size===1?"country":"countries"}
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+function renderCuriosity(){
+
+const card=curiosityCards[curiosityIndex];
+
+document.getElementById("curiosityType").textContent=card.type;
+document.getElementById("curiosityTitle").textContent=card.title;
+document.getElementById("curiosityText").textContent=card.text;
+
+}
+
+function nextCuriosity(){
+
+curiosityIndex=(curiosityIndex+1)%curiosityCards.length;
+renderCuriosity();
+
+}
+
+function escapeHTML(value){
+
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+renderCuriosity();
 updateDashboard();
 
-document.getElementById("date").value =
-new Date().toISOString().slice(0,10);
+const dateInput=document.getElementById("date");
+
+if(dateInput){
+dateInput.value=new Date().toISOString().slice(0,10);
+}
 
 </script>
 
-</body
+</body>
+</html>
