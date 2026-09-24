@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160d10">
+
+<title>Sommelier</title>
+
+<style>
+:root {
+  --bg:#100b0d;
+  --card:#1b1316;
+  --card2:#24191d;
+  --wine:#7b2338;
+  --wine2:#a13a55;
+  --cream:#f5ead8;
+  --muted:#a99b98;
+  --line:#392b30;
+  --green:#79966d;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--cream);
+  padding-bottom:90px;
+}
+
+header {
+  padding:26px 20px 12px;
+}
+
+h1 {
+  margin:0;
+  font-family:Georgia, serif;
+  font-size:32px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.page {
+  display:none;
+  padding:10px 18px;
+  max-width:600px;
+  margin:auto;
+}
+
+.page.active {
+  display:block;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin:14px 0;
+}
+
+.hero {
+  background:linear-gradient(135deg,#35151e,#1b1115);
+}
+
+button {
+  border:none;
+  border-radius:14px;
+  padding:14px 16px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.primary {
+  width:100%;
+  background:var(--wine);
+  color:white;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+.secondary {
+  width:100%;
+  background:var(--card2);
+  color:var(--cream);
+  border:1px solid var(--line);
+  margin-top:8px;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.stat {
+  background:var(--card);
+  padding:15px;
+  border-radius:15px;
+  border:1px solid var(--line);
+}
+
+.stat strong {
+  font-size:24px;
+  display:block;
+}
+
+label {
+  display:block;
+  color:var(--muted);
+  margin-top:14px;
+  margin-bottom:6px;
+  font-size:13px;
+}
+
+input, textarea, select {
+  width:100%;
+  padding:13px;
+  background:#130e10;
+  border:1px solid var(--line);
+  color:var(--cream);
+  border-radius:12px;
+  font-size:16px;
+}
+
+textarea {
+  min-height:80px;
+}
+
+.chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chip {
+  background:var(--card2);
+  border:1px solid var(--line);
+  color:var(--cream);
+  padding:9px 12px;
+  border-radius:30px;
+  font-size:14px;
+}
+
+.chip.selected {
+  background:var(--wine);
+  border-color:var(--wine2);
+}
+
+.sectionTitle {
+  font-family:Georgia,serif;
+  font-size:23px;
+  margin:15px 0 5px;
+}
+
+.small {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.progress {
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
+.progress .current {
+  color:var(--cream);
+  font-weight:bold;
+}
+
+.step {
+  display:none;
+}
+
+.step.active {
+  display:block;
+}
+
+.navButtons {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.navButtons button {
+  flex:1;
+}
+
+.wineCard {
+  padding:15px;
+  border-bottom:1px solid var(--line);
+}
+
+.wineCard:last-child {
+  border-bottom:none;
+}
+
+.rating {
+  color:#e7c56a;
+  letter-spacing:2px;
+}
+
+.bottomNav {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#130e10;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:8px 4px 14px;
+  z-index:100;
+}
+
+.bottomNav button {
+  background:none;
+  color:var(--muted);
+  padding:7px 2px;
+  font-size:12px;
+}
+
+.bottomNav button.active {
+  color:var(--cream);
+}
+
+.icon {
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.learnItem {
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:14px;
+  margin:10px 0;
+}
+
+details summary {
+  cursor:pointer;
+  font-weight:bold;
+}
+
+details p {
+  color:#d3c6c2;
+  line-height:1.5;
+}
+
+hr {
+  border:0;
+  border-top:1px solid var(--line);
+  margin:20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Sommelier</h1>
+  <div class="subtitle">My Wine Journey</div>
+</header>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+  <div class="card hero">
+    <div class="small">YOUR TRAINING</div>
+    <h2>Train your palate.</h2>
+    <p class="small">
+      Taste deliberately. Record what you experience.
+      Build your wine memory one bottle at a time.
+    </p>
+
+    <button class="primary" onclick="startTasting()">
+      🍷 Start New Tasting
+    </button>
+  </div>
+
+  <h3>Progress</h3>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="wineCount">0</strong>
+      Wines
+    </div>
+
+    <div class="stat">
+      <strong id="grapeCount">0</strong>
+      Grapes
+    </div>
+
+    <div class="stat">
+      <strong id="countryCount">0</strong>
+      Countries
+    </div>
+
+    <div class="stat">
+      <strong id="regionCount">0</strong>
+      Regions
+    </div>
+  </div>
+
+  <h3>Recent Tastings</h3>
+
+  <div id="recentWines" class="card">
+    <div class="small">Your first tasting will appear here.</div>
+  </div>
+
+</section>
+
+<!-- TASTING -->
+
+<section id="tasting" class="page">
+
+<div class="progress">
+  <span id="p0">Bottle</span>
+  <span id="p1">Look</span>
+  <span id="p2">Nose</span>
+  <span id="p3">Palate</span>
+  <span id="p4">Conclusion</span>
+</div>
+
+<!-- STEP 0 -->
+
+<div class="step" id="step0">
+
+<div class="sectionTitle">The Bottle</div>
+<p class="small">Record what you know about the wine.</p>
+
+<label>Wine Name</label>
+<input id="wineName">
+
+<label>Producer</label>
+<input id="producer">
+
+<label>Vintage</label>
+<input id="vintage" inputmode="numeric">
+
+<label>Country</label>
+<input id="country">
+
+<label>Region</label>
+<input id="region">
+
+<label>Grape Variety</label>
+<input id="grape">
+
+<label>Price</label>
+<input id="price">
+
+<label>Date Tasted</label>
+<input id="date" type="date">
+
+<div class="navButtons">
+<button class="primary" onclick="nextStep()">Continue →</button>
+</div>
+
+</div>
+
+<!-- LOOK -->
+
+<div class="step" id="step1">
+
+<div class="sectionTitle">Look 👁️</div>
+<p class="small">Use a white background and tilt the glass.</p>
+
+<label>Wine Type</label>
+<div class="chips" data-field="type">
+<button class="chip">Red</button>
+<button class="chip">White</button>
+<button class="chip">Rosé</button>
+</div>
+
+<label>Clarity</label>
+<div class="chips" data-field="clarity">
+<button class="chip">Clear</button>
+<button class="chip">Hazy</button>
+</div>
+
+<label>Intensity</label>
+<div class="chips" data-field="appearanceIntensity">
+<button class="chip">Pale</button>
+<button class="chip">Medium</button>
+<button class="chip">Deep</button>
+</div>
+
+<label>Colour</label>
+<input id="colour" placeholder="Ruby, garnet, lemon, gold...">
+
+<label>Your observations</label>
+<textarea id="lookNotes"></textarea>
+
+<div class="navButtons">
+<button class="secondary" onclick="previousStep()">← Back</button>
+<button class="primary" onclick="nextStep()">Nose →</button>
+</div>
+
+</div>
+
+<!-- NOSE -->
+
+<div class="step" id="step2">
+
+<div class="sectionTitle">Nose 👃</div>
+
+<p class="small">
+Smell before swirling. Then swirl and smell again.
+Work broad → specific.
+</p>
+
+<label>Condition</label>
+<div class="chips" data-field="condition">
+<button class="chip">Clean</button>
+<button class="chip">Fault suspected</button>
+</div>
+
+<label>Aroma Intensity</label>
+<div class="chips" data-field="noseIntensity">
+<button class="chip">Light</button>
+<button class="chip">Medium</button>
+<button class="chip">Pronounced</button>
+</div>
+
+<hr>
+
+<details open class="learnItem">
+<summary>🍋 Citrus</summary>
+<div class="chips multi">
+<button class="chip">Lemon</button>
+<button class="chip">Lime</button>
+<button class="chip">Grapefruit</button>
+<button class="chip">Orange</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🍎 Green Fruit</summary>
+<div class="chips multi">
+<button class="chip">Apple</button>
+<button class="chip">Pear</button>
+<button class="chip">Gooseberry</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🍑 Stone Fruit</summary>
+<div class="chips multi">
+<button class="chip">Peach</button>
+<button class="chip">Apricot</button>
+<button class="chip">Nectarine</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🥭 Tropical Fruit</summary>
+<div class="chips multi">
+<button class="chip">Pineapple</button>
+<button class="chip">Mango</button>
+<button class="chip">Passion Fruit</button>
+<button class="chip">Banana</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🍓 Red Fruit</summary>
+<div class="chips multi">
+<button class="chip">Strawberry</button>
+<button class="chip">Raspberry</button>
+<button class="chip">Red Cherry</button>
+<button class="chip">Cranberry</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🫐 Black Fruit</summary>
+<div class="chips multi">
+<button class="chip">Blackberry</button>
+<button class="chip">Black Cherry</button>
+<button class="chip">Blackcurrant</button>
+<button class="chip">Plum</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🌹 Floral</summary>
+<div class="chips multi">
+<button class="chip">Blossom</button>
+<button class="chip">Rose</button>
+<button class="chip">Violet</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🌿 Herbal / Vegetal</summary>
+<div class="chips multi">
+<button class="chip">Grass</button>
+<button class="chip">Mint</button>
+<button class="chip">Eucalyptus</button>
+<button class="chip">Bell Pepper</button>
+</div>
+</details>
+
+<details class="learnItem">
+<summary>🪵 Oak / Spice</summary>
+<div class="chips multi">
+<button class="chip">Vanilla</button>
+<button class="chip">Toast</button>
+<button class="chip">Cedar</button>
+<button class="chip">Smoke</button>
+<button class="chip">Coconut</button>
+<button class="chip">Pepper</button>
+<button class="chip">Clove</button>
+</div>
+</details>
+
+<label>Additional aromas</label>
+<input id="customAromas" placeholder="Leather, tobacco, mushroom...">
+
+<div class="navButtons">
+<button class="secondary" onclick="previousStep()">← Look</button>
+<button class="primary" onclick="nextStep()">Palate →</button>
+</div>
+
+</div>
+
+<!-- PALATE -->
+
+<div class="step" id="step3">
+
+<div class="sectionTitle">Palate 👅</div>
+
+<p class="small">
+Take a small sip and move the wine around your mouth.
+Focus on structure before flavour.
+</p>
+
+<div id="palateFields"></div>
+
+<label>Flavours / Notes</label>
+<textarea id="palateNotes"></textarea>
+
+<div class="navButtons">
+<button class="secondary" onclick="previousStep()">← Nose</button>
+<button class="primary" onclick="nextStep()">Conclusion →</button>
+</div>
+
+</div>
+
+<!-- CONCLUSION -->
+
+<div class="step" id="step4">
+
+<div class="sectionTitle">Conclusion 🎓</div>
+
+<label>Food Pairing</label>
+<input id="pairing" placeholder="What would you serve with it?">
+
+<label>Why does the pairing work?</label>
+<textarea id="pairingWhy"></textarea>
+
+<label>What 2–3 clues would help you recognize this wine again?</label>
+<textarea id="memoryClues"></textarea>
+
+<label>Personal Rating</label>
+
+<div class="chips" data-field="rating">
+<button class="chip">1</button>
+<button class="chip">2</button>
+<button class="chip">3</button>
+<button class="chip">4</button>
+<button class="chip">5</button>
+</div>
+
+<label>Would you buy it again?</label>
+
+<div class="chips" data-field="buyAgain">
+<button class="chip">Yes</button>
+<button class="chip">Maybe</button>
+<button class="chip">No</button>
+</div>
+
+<label>Final Notes</label>
+<textarea id="finalNotes"></textarea>
+
+<div class="navButtons">
+<button class="secondary" onclick="previousStep()">← Palate</button>
+<button class="primary" onclick="saveTasting()">Save Tasting ✓</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- MY WINES -->
+
+<section id="wines" class="page">
+
+<div class="sectionTitle">My Wines</div>
+
+<input id="searchWine"
+placeholder="Search wines..."
+oninput="renderWines()">
+
+<div id="wineList" class="card"></div>
+
+</section>
+
+<!-- LEARN -->
+
+<section id="learn" class="page">
+
+<div class="sectionTitle">Learn</div>
+<p class="small">Your pocket sommelier reference.</p>
+
+<details class="learnItem">
+<summary>👁️ Appearance Guide</summary>
+<p>
+White: Lemon-green → Lemon → Gold → Amber → Brown
+</p>
+<p>
+Red: Purple → Ruby → Garnet → Tawny → Brown
+</p>
+<p>
+Rosé: Pink → Salmon → Orange
+</p>
+</details>
+
+<details class="learnItem">
+<summary>👃 How to Smell Wine</summary>
+<p>
+Smell first without swirling. Then swirl gently and smell again.
+Start broad: fruit, floral, herbal, spice, oak, earth.
+Only then become specific.
+</p>
+</details>
+
+<details class="learnItem">
+<summary>👅 Acidity</summary>
+<p>
+Acidity creates freshness and makes your mouth water.
+Pay attention to salivation after swallowing or spitting.
+</p>
+</details>
+
+<details class="learnItem">
+<summary>🍂 Tannin</summary>
+<p>
+Tannin creates a drying or gripping sensation on your gums,
+tongue and cheeks. It is especially important in red wine.
+</p>
+</details>
+
+<details class="learnItem">
+<summary>⚖️ Body</summary>
+<p>
+Body is the overall weight and texture of wine.
+Think of the difference between skim milk, whole milk and cream.
+</p>
+</details>
+
+<details class="learnItem">
+<summary>🍽️ Food Pairing</summary>
+<p>
+Acidic food generally needs an equally acidic wine.
+Sweet wine should generally be at least as sweet as the dessert.
+Salt can soften the perception of tannin.
+High alcohol can intensify spicy heat.
+</p>
+</details>
+
+<details class="learnItem">
+<summary>🎯 Training Rule</summary>
+<p>
+Taste first. Write your observations.
+Only afterward research the wine.
+Never let someone else's tasting notes tell you what you should smell.
+</p>
+</details>
+
+</section>
+
+<!-- NAV -->
+
+<nav class="bottomNav">
+
+<button onclick="showPage('home',this)" class="active">
+<span class="icon">⌂</span>
+Home
+</button>
+
+<button onclick="startTasting()">
+<span class="icon">🍷</span>
+Taste
+</button>
+
+<button onclick="showPage('wines',this)">
+<span class="icon">▤</span>
+My Wines
+</button>
+
+<button onclick="showPage('learn',this)">
+<span class="icon">🎓</span>
+Learn
+</button>
+
+</nav>
+
+<script>
+
+let currentStep = 0;
+let selections = {};
+let aromas = [];
+
+const palateOptions = {
+  Sweetness:["Dry","Off-dry","Medium","Sweet"],
+  Acidity:["Low","Medium-","Medium","Medium+","High"],
+  Tannin:["Low","Medium-","Medium","Medium+","High"],
+  Alcohol:["Low","Medium","High"],
+  Body:["Light","Medium-","Medium","Medium+","Full"],
+  "Flavor Intensity":["Light","Medium","Pronounced"],
+  Finish:["Short","Medium","Long"]
+};
+
+function buildPalate(){
+
+  const container = document.getElementById("palateFields");
+
+  Object.entries(palateOptions).forEach(([field,options])=>{
+
+    const label = document.createElement("label");
+    label.textContent = field;
+
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    chips.dataset.field = field;
+
+    options.forEach(option=>{
+
+      const button = document.createElement("button");
+
+      button.className = "chip";
+      button.textContent = option;
+
+      chips.appendChild(button);
+
+    });
+
+    container.appendChild(label);
+    container.appendChild(chips);
+
+  });
+
+}
+
+buildPalate();
+
+document.addEventListener("click",function(e){
+
+  if(!e.target.classList.contains("chip")) return;
+
+  e.preventDefault();
+
+  const chip = e.target;
+  const group = chip.parentElement;
+
+  if(group.classList.contains("multi")){
+
+    chip.classList.toggle("selected");
+
+    const value = chip.textContent;
+
+    if(chip.classList.contains("selected")){
+      if(!aromas.includes(value)) aromas.push(value);
+    } else {
+      aromas = aromas.filter(a=>a!==value);
+    }
+
+  } else {
+
+    group.querySelectorAll(".chip").forEach(c=>{
+      c.classList.remove("selected");
+    });
+
+    chip.classList.add("selected");
+
+    if(group.dataset.field){
+      selections[group.dataset.field] = chip.textContent;
+    }
+
+  }
+
+});
+
+function showPage(id,button){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".bottomNav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  if(id==="wines") renderWines();
+
+  window.scrollTo(0,0);
+}
+
+function startTasting(){
+
+  showPage("tasting");
+
+  currentStep = 0;
+
+  showStep();
+
+}
+
+function showStep(){
+
+  document.querySelectorAll(".step").forEach(s=>{
+    s.classList.remove("active");
+  });
+
+  document.getElementById("step"+currentStep).classList.add("active");
+
+  for(let i=0;i<5;i++){
+    document.getElementById("p"+i).classList.remove("current");
+  }
+
+  document.getElementById("p"+currentStep).classList.add("current");
+
+  window.scrollTo(0,0);
+}
+
+function nextStep(){
+
+  if(currentStep<4){
+    currentStep++;
+    showStep();
+  }
+
+}
+
+function previousStep(){
+
+  if(currentStep>0){
+    currentStep--;
+    showStep();
+  }
+
+}
+
+function value(id){
+  return document.getElementById(id)?.value || "";
+}
+
+function saveTasting(){
+
+  const wine = {
+
+    id:Date.now(),
+
+    wine:value("wineName"),
+    producer:value("producer"),
+    vintage:value("vintage"),
+    country:value("country"),
+    region:value("region"),
+    grape:value("grape"),
+    price:value("price"),
+
+    type:selections.type || "",
+    clarity:selections.clarity || "",
+    appearanceIntensity:selections.appearanceIntensity || "",
+    colour:value("colour"),
+
+    condition:selections.condition || "",
+    noseIntensity:selections.noseIntensity || "",
+
+    aromas:[...aromas],
+
+    sweetness:selections.Sweetness || "",
+    acidity:selections.Acidity || "",
+    tannin:selections.Tannin || "",
+    alcohol:selections.Alcohol || "",
+    body:selections.Body || "",
+    finish:selections.Finish || "",
+
+    pairing:value("pairing"),
+    pairingWhy:value("pairingWhy"),
+    memory:value("memoryClues"),
+
+    rating:selections.rating || "",
+    buyAgain:selections.buyAgain || "",
+
+    notes:value("finalNotes"),
+
+    date:value("date") || new Date().toISOString().slice(0,10)
+
+  };
+
+  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+
+  wines.unshift(wine);
+
+  localStorage.setItem("sommelierWines",JSON.stringify(wines));
+
+  alert("🍷 Tasting saved!");
+
+  resetTasting();
+
+  updateDashboard();
+
+  showPage("wines");
+
+}
+
+function resetTasting(){
+
+  document.querySelectorAll("input,textarea").forEach(i=>{
+    if(i.id!=="searchWine") i.value="";
+  });
+
+  document.querySelectorAll(".chip").forEach(c=>{
+    c.classList.remove("selected");
+  });
+
+  selections={};
+  aromas=[];
+
+}
+
+function renderWines(){
+
+  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+
+  const search = (document.getElementById("searchWine")?.value || "").toLowerCase();
+
+  const filtered = wines.filter(w=>
+    JSON.stringify(w).toLowerCase().includes(search)
+  );
+
+  const list = document.getElementById("wineList");
+
+  if(!filtered.length){
+
+    list.innerHTML =
+    '<div class="small">No wines recorded yet.</div>';
+
+    return;
+
+  }
+
+  list.innerHTML = filtered.map(w=>`
+
+  <div class="wineCard">
+
+    <strong>${w.wine || "Unnamed Wine"}</strong>
+
+    <div class="small">
+    ${w.producer || ""}
+    ${w.vintage ? " • "+w.vintage : ""}
+    </div>
+
+    <div class="small">
+    ${w.country || ""}
+    ${w.region ? " • "+w.region : ""}
+    </div>
+
+    <div class="small">
+    ${w.grape || ""}
+    </div>
+
+    <div class="rating">
+    ${"★".repeat(Number(w.rating)||0)}
+    </div>
+
+  </div>
+
+  `).join("");
+
+}
+
+function updateDashboard(){
+
+  const wines = JSON.parse(localStorage.getItem("sommelierWines") || "[]");
+
+  document.getElementById("wineCount").textContent = wines.length;
+
+  document.getElementById("grapeCount").textContent =
+  new Set(wines.map(w=>w.grape).filter(Boolean)).size;
+
+  document.getElementById("countryCount").textContent =
+  new Set(wines.map(w=>w.country).filter(Boolean)).size;
+
+  document.getElementById("regionCount").textContent =
+  new Set(wines.map(w=>w.region).filter(Boolean)).size;
+
+  const recent = wines.slice(0,3);
+
+  const container = document.getElementById("recentWines");
+
+  if(!recent.length) return;
+
+  container.innerHTML = recent.map(w=>`
+
+  <div class="wineCard">
+
+  <strong>${w.wine || "Unnamed Wine"}</strong>
+
+  <div class="small">
+  ${w.producer || ""}
+  ${w.vintage ? " • "+w.vintage : ""}
+  </div>
+
+  </div>
+
+  `).join("");
+
+}
+
+updateDashboard();
+
+document.getElementById("date").value =
+new Date().toISOString().slice(0,10);
+
+</script>
+
+</body
